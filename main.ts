@@ -26,11 +26,6 @@ info.onLifeZero(function () {
     game.setGameOverPlayable(false, music.melodyPlayable(music.wawawawaa), false)
     game.reset()
 })
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    info.changeScoreBy(1)
-    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
-    sprites.destroy(otherSprite, effects.spray, 500)
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.disintegrate, 500)
     info.changeLifeBy(-1)
