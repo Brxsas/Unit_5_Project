@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const star = SpriteKind.create()
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(img`
         . . . . . . . . . . . . . . . . 
@@ -19,17 +22,17 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         `, iceCream, 200, 0)
     music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    info.changeScoreBy(1)
-    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
-    sprites.destroy(otherSprite)
-})
 info.onLifeZero(function () {
     music.stopAllSounds()
     game.gameOver(false)
     game.setGameOverEffect(false, effects.dissolve)
     game.setGameOverPlayable(false, music.melodyPlayable(music.wawawawaa), false)
     game.reset()
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.star, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite, effects.hearts, 500)
+    info.changeScoreBy(1)
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.disintegrate, 500)
@@ -220,6 +223,7 @@ game.onUpdateInterval(1000, function () {
         . . . . . . 3 1 3 . . . . . . . 
         . . . . . . 3 3 . . . . . . . . 
         `, SpriteKind.Enemy)
+    Redshinystar.setFlag(SpriteFlag.AutoDestroy, true)
     Redshinystar.setVelocity(-100, 0)
     Redshinystar.setPosition(160, randint(0, 120))
     star = sprites.create(img`
@@ -239,7 +243,8 @@ game.onUpdateInterval(1000, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Projectile)
+        `, SpriteKind.star)
+    Redshinystar.setFlag(SpriteFlag.AutoDestroy, true)
     star.setVelocity(-50, 0)
     star.setPosition(160, randint(0, 120))
 })
