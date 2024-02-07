@@ -21,8 +21,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     info.changeScoreBy(1)
-    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
     sprites.destroy(otherSprite, effects.spray, 500)
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
 })
 info.onLifeZero(function () {
     music.stopAllSounds()
