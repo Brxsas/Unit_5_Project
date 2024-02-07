@@ -240,6 +240,6 @@ game.onUpdateInterval(1000, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Projectile)
-    star.setVelocity(-100, 0)
+    star.setVelocity(-50, 0)
     star.setPosition(160, randint(0, 120))
 })
